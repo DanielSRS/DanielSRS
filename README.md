@@ -129,7 +129,7 @@
 </a>
 
 <a href="https://github.com/DanielSRS">
-<img align="center" alt="Daniel-Github" height="30" width="30" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
+<img align="center" alt="Daniel-Github" height="30" width="30" src="https://user-images.githubusercontent.com/39845798/148144680-25c332fd-8e95-479c-a0a3-6837497bba0a.jpg" />
 
 </a>
 
@@ -143,12 +143,6 @@
 
 
 </div>
-
-
-
-
-
-
 
 
 
