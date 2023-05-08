@@ -68,13 +68,13 @@
 
 <div>
 
-<img src="https://github-readme-stats.vercel.app/api?username=DanielSRS&count_private=true&show_icons=true&bg_color=000&border_radius=30&hide_border=true&title_color=FFFFFF&text_color=FFFFFF&icon_color=FFFFFF&line_height=30&card_width=450px" />
+<img src="https://dsrs-github-readme-stats.vercel.app/api?username=DanielSRS&count_private=true&show_icons=true&bg_color=000&border_radius=30&hide_border=true&title_color=FFFFFF&text_color=FFFFFF&icon_color=FFFFFF&line_height=30&card_width=450px" />
 
 
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=DanielSRS&layout=compact&langs_count=10&show_icons=true&bg_color=000&border_radius=30&hide_border=true&title_color=FFFFFF&text_color=FFFFFF&icon_color=FFFFFF&card_width=450px" />
+<img src="https://dsrs-github-readme-stats.vercel.app/api/top-langs/?username=DanielSRS&layout=compact&langs_count=10&show_icons=true&bg_color=000&border_radius=30&hide_border=true&title_color=FFFFFF&text_color=FFFFFF&icon_color=FFFFFF&card_width=450px" />
 
 
-<img src="https://github-readme-stats.vercel.app/api/wakatime?username=DanielSRS&show_icons=true&bg_color=000&border_radius=30&hide_border=true&text_color=FFFFFF&icon_color=FFFFFF" />
+<img src="https://dsrs-github-readme-stats.vercel.app/api/wakatime?username=DanielSRS&show_icons=true&bg_color=000&border_radius=30&hide_border=true&text_color=FFFFFF&icon_color=FFFFFF" />
 
 </div>
 
