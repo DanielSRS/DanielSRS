@@ -74,7 +74,7 @@
 <img src="https://dsrs-github-readme-stats.vercel.app/api/top-langs/?username=DanielSRS&layout=compact&langs_count=10&show_icons=true&bg_color=000&border_radius=30&hide_border=true&title_color=FFFFFF&text_color=FFFFFF&icon_color=FFFFFF&card_width=450px" />
 
 
-<img src="https://dsrs-github-readme-stats.vercel.app/api/wakatime?username=DanielSRS&show_icons=true&bg_color=000&border_radius=30&hide_border=true&text_color=FFFFFF&icon_color=FFFFFF" />
+<img src="https://dsrs-github-readme-stats.vercel.app/api/wakatime?username=DanielSRS&range=last_7_days&langs_count=10&layout=compact&show_icons=true&bg_color=000&border_radius=30&hide_border=true&text_color=FFFFFF&icon_color=FFFFFF&card_width=450px" />
 
 </div>
 
