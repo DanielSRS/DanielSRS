@@ -76,6 +76,8 @@
 
 <img src="https://dsrs-github-readme-stats.vercel.app/api/wakatime?username=DanielSRS&range=last_7_days&langs_count=10&layout=compact&show_icons=true&bg_color=000&border_radius=30&hide_border=true&text_color=FFFFFF&icon_color=FFFFFF&card_width=450px" />
 
+<img alt="Visitor Stats" src="https://widgetbite.com/stats/DanielSRS" style="opacity: 0.1; height: 1px;" />
+
 </div>
 
 
