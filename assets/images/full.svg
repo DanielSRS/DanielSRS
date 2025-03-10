@@ -1,4 +1,9 @@
-<svg fill="none" viewBox="0 0 600 702" width="600" height="702" xmlns="http://www.w3.org/2000/svg">
+<svg
+  fill="none"
+  width="100%"
+  height="100%"
+  preserveAspectRatio="none"
+  xmlns="http://www.w3.org/2000/svg">
   <foreignObject width="100%" height="100%">
   <div xmlns="http://www.w3.org/1999/xhtml">
     <script type="text/javascript">
@@ -701,6 +706,9 @@
               src="https://dsrs-github-readme-stats.vercel.app/api/wakatime?username=DanielSRS&amp;range=last_7_days&amp;langs_count=10&amp;layout=compact&amp;show_icons=true&amp;bg_color=00000000&amp;border_radius=0&amp;hide_border=true&amp;text_color=fff&amp;icon_color=fff&amp;card_width=450px&amp;line_height=25&amp;hide_title=true"
             />
           </div>
+            <img
+              src="https://fastly.picsum.photos/id/929/200/300.jpg?hmac=cDiAv5Denc7xEb3NN4q1-CKp6ryrG-3uLdj2XhA90WU"
+            />
         </div>
       </body>
     </div>
