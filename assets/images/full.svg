@@ -5,7 +5,7 @@
   preserveAspectRatio="none"
   xmlns="http://www.w3.org/2000/svg">
   <foreignObject width="100%" height="100%">
-  <div xmlns="http://www.w3.org/1999/xhtml">
+  <html xmlns="http://www.w3.org/1999/xhtml">
     <script type="text/javascript">
       <![CDATA[
         console.log("Meu nome não é JOHNNY");
@@ -116,17 +116,6 @@
         padding: 0;
         flex-direction: column;
         align-items: center;
-        background: var(--background-color);
-        color: var(--text-color);
-      }
-
-      .body {
-        display: flex;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        flex-direction: column;
-        align-items: center;
         /**
         background: var(--background-color);
         **/
@@ -142,12 +131,12 @@
         overflow-x: hidden;
       }
 
-      @media screen and (max-width: 180px) {
+      @media screen and (max-width: 480px) {
         :root {
           font-size: 14px;
         }
         body {
-          padding: var(--line-height) 1ch;
+          
         }
       }
 
@@ -543,6 +532,9 @@
       .debug-toggle-label {
         text-align: right;
       }
+      .subtitle {
+        
+      }
     </style>
 
     <!-- my custom styles -->
@@ -565,153 +557,148 @@
         gap: 20px;
       }
     </style>
-    <div class='body'>
-      <!-- content -->
-      <body class='debug'>
-        <table class="header">
-          <tr>
-            <td colspan="2" rowspan="2" class="width-auto">
-              <h1 class="title">Daniel Santa Rosa</h1>
-              <span class="subtitle">computer engineer</span>
-            </td>
-            <th>Version</th>
-            <td class="width-min">v0.0.1</td>
-          </tr>
-          <tr>
-            <th>Updated</th>
-            <td class="width-min"><time style="white-space: pre;">09-03-2025</time></td>
-          </tr>
-          <tr>
-            <th class="width-min" style="opacity: 0;">Author</th>
-            <td class="width-auto" style="opacity: 0;">
-              <a href="https://wickstrom.tech">
-                <cite>
-                  Oskar Wickström
-                </cite>
-              </a>
-            </td>
-            <th class="width-min">License</th>
-            <td>MIT</td>
-          </tr>
-        </table>
-
-        <!--  -->
-        <label class="debug-toggle-label"><input type="checkbox" class="debug-toggle" /> Debug mode</label>
-
-        <!--  -->
-        <!-- <nav id="TOC" role="doc-toc"> -->
-        <h2 id="toc-title">Contents</h2>
-
-        <!--  -->
-        <ul class="incremental">
-          <li><a href="#introduction" id="toc-introduction">Introduction</a></li>
-          <li><a href="#skills" id="toc-skills">Skills</a></li>
-          <li><a href="#my-stats" id="toc-lists">My Stats</a></li>
-          <!-- <li><a href="#tables" id="toc-my-stats">Tables</a></li>
-          <li><a href="#forms" id="toc-forms">Forms</a></li>
-          <li><a href="#grids" id="toc-grids">Grids</a></li>
-          <li>
-            <a href="#ascii-drawings" id="toc-ascii-drawings">
-              ASCII Drawings
+    <!-- content -->
+    <body class='debug'>
+      <table class="header">
+        <tr>
+          <td colspan="2" rowspan="2" class="width-auto">
+            <h1 class="title">Daniel Santa Rosa</h1>
+            <span class="subtitle">computer engineer</span>
+          </td>
+          <th>Version</th>
+          <td class="width-min">v0.0.1</td>
+        </tr>
+        <tr>
+          <th>Updated</th>
+          <td class="width-min"><time style="white-space: pre;">09-03</time></td>
+        </tr>
+        <tr>
+          <th class="width-min" style="opacity: 0;">Author</th>
+          <td class="width-auto" style="opacity: 0;">
+            <a href="https://wickstrom.tech">
+              <cite>
+                Oskar Wickström
+              </cite>
             </a>
-          </li>
-          <li><a href="#media" id="toc-media">Media</a></li>
-          <li><a href="#discussion" id="toc-discussion">Discussion</a></li> -->
-        </ul>
+          </td>
+          <th class="width-min">License</th>
+          <td>MIT</td>
+        </tr>
+      </table>
 
-         <!--  -->
-        <h2 id="introduction">Introduction</h2>
-        <p>
-          Hi, I code 👁️👄👁️.
-          <br />
-          <br />
-          I've been bulding things for some time now: On mobile, web, desktop, server, embeded, iot, microcontrolers and even some hardware.
-          <br />
-          <br />
-          It's been fun.
-        </p>
+      <!--  -->
+      <label class="debug-toggle-label"><input type="checkbox" class="debug-toggle" /> Debug mode</label>
+
+      <!--  -->
+      <!-- <nav id="TOC" role="doc-toc"> -->
+      <h2 id="toc-title">Contents</h2>
+
+      <!--  -->
+      <ul class="incremental">
+        <li><a href="#introduction" id="toc-introduction">Introduction</a></li>
+        <li><a href="#skills" id="toc-skills">Skills</a></li>
+        <li><a href="#my-stats" id="toc-lists">My Stats</a></li>
+        <!-- <li><a href="#tables" id="toc-my-stats">Tables</a></li>
+        <li><a href="#forms" id="toc-forms">Forms</a></li>
+        <li><a href="#grids" id="toc-grids">Grids</a></li>
+        <li>
+          <a href="#ascii-drawings" id="toc-ascii-drawings">
+            ASCII Drawings
+          </a>
+        </li>
+        <li><a href="#media" id="toc-media">Media</a></li>
+        <li><a href="#discussion" id="toc-discussion">Discussion</a></li> -->
+      </ul>
 
         <!--  -->
-        <h2 id="skills">Skills</h2>
-        <div class="skillsBlock" style="display: flex; gap: 4px; align-items: baseline">
+      <h2 id="introduction">Introduction</h2>
+      <p>
+        Hi, I code 👁️👄👁️.
+        <br />
+        <br />
+        I've been bulding things for some time now: On mobile, web, desktop, server, embeded, iot, microcontrolers and even some hardware.
+        <br />
+        <br />
+        It's been fun.
+      </p>
+
+      <!--  -->
+      <h2 id="skills">Skills</h2>
+      <div class="skillsBlock" style="display: flex; gap: 4px; align-items: baseline">
+        <img
+          alt="Daniel-Js"
+          height="30"
+          width="40"
+          src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg"
+        />
+        <img
+          alt="Daniel-Ts"
+          height="30" width="40"
+          src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-plain.svg"/>
+        <img
+          align="center"
+          alt="Daniel-React"
+          height="30" width="40"
+          src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg"/>
+        <img align="center" alt="Daniel-HTML" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg"/>
+        <img align="center" alt="Daniel-CSS" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg"/>
+        <img align="center" alt="Daniel-Python" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg"/>
+        <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg"/>
+        <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg"/>
+        <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg"/>
+        <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/xd/xd-plain.svg"/>
+        <img align="center" alt="Daniel-Csharp" height="30" width="40"  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" />
+        <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" />
+        <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" />
+        <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" />
+        <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" />
+        <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg" />
+        <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" />
+      </div>
+
+      <h2 id="my-stats">My Stats</h2>
+      <div class="statsBlock">
+        <!-- Github stats -->
+        <div class="imgcont" style="display: none">
           <img
-            alt="Daniel-Js"
-            height="30"
-            width="40"
-            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg"
+            class="hideOnDarkMode"
+            heightt="200" widtht="300"
+            src="https://dsrs-github-readme-stats.vercel.app/api?username=DanielSRS&amp;count_private=true&amp;show_icons=true&amp;bg_color=00000000&amp;border_radius=0&amp;hide_border=true&amp;title_color=000&amp;text_color=000&amp;icon_color=000&amp;line_height=25&amp;card_width=450px&amp;hide_title=true"
           />
           <img
-            alt="Daniel-Ts"
-            height="30" width="40"
-            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-plain.svg"/>
+            class="hideOnLightMode"
+            heightt="200" widtht="300"
+            src="https://dsrs-github-readme-stats.vercel.app/api?username=DanielSRS&amp;count_private=true&amp;show_icons=true&amp;bg_color=00000000&amp;border_radius=0&amp;hide_border=true&amp;title_color=fff&amp;text_color=fff&amp;icon_color=fff&amp;line_height=25&amp;card_width=450px&amp;hide_title=true"
+          />
+        </div>
+
+        <!--  -->
+        <div class="imgcont" style="display: none; justify-content: flex-end;">
           <img
-            align="center"
-            alt="Daniel-React"
-            height="30" width="40"
-            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg"/>
-          <img align="center" alt="Daniel-HTML" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg"/>
-          <img align="center" alt="Daniel-CSS" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg"/>
-          <img align="center" alt="Daniel-Python" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg"/>
-          <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg"/>
-          <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg"/>
-          <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg"/>
-          <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/xd/xd-plain.svg"/>
-          <img align="center" alt="Daniel-Csharp" height="30" width="40"  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" />
-          <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" />
-          <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" />
-          <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" />
-          <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" />
-          <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg" />
-          <img align="center" alt="Daniel-Csharp" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" />
+            class="hideOnDarkMode"
+            src="https://dsrs-github-readme-stats.vercel.app/api/top-langs/?username=DanielSRS&amp;layout=compact&amp;langs_count=10&amp;show_icons=true&amp;bg_color=00000000&amp;border_radius=0&amp;hide_border=true&amp;title_color=000&amp;text_color=000&amp;icon_color=000&amp;card_width=450px&amp;line_height=25&amp;hide_title=true"
+          />
+          <img
+            class="hideOnLightMode"
+            src="https://dsrs-github-readme-stats.vercel.app/api/top-langs/?username=DanielSRS&amp;layout=compact&amp;langs_count=10&amp;show_icons=true&amp;bg_color=00000000&amp;border_radius=0&amp;hide_border=true&amp;title_color=fff&amp;text_color=fff&amp;icon_color=fff&amp;card_width=450px&amp;line_height=25&amp;hide_title=true"
+          />
         </div>
 
-        <h2 id="my-stats">My Stats</h2>
-        <div class="statsBlock">
-          <!-- Github stats -->
-          <div class="imgcont" style="display: none">
-            <img
-              class="hideOnDarkMode"
-              heightt="200" widtht="300"
-              src="https://dsrs-github-readme-stats.vercel.app/api?username=DanielSRS&amp;count_private=true&amp;show_icons=true&amp;bg_color=00000000&amp;border_radius=0&amp;hide_border=true&amp;title_color=000&amp;text_color=000&amp;icon_color=000&amp;line_height=25&amp;card_width=450px&amp;hide_title=true"
-            />
-            <img
-              class="hideOnLightMode"
-              heightt="200" widtht="300"
-              src="https://dsrs-github-readme-stats.vercel.app/api?username=DanielSRS&amp;count_private=true&amp;show_icons=true&amp;bg_color=00000000&amp;border_radius=0&amp;hide_border=true&amp;title_color=fff&amp;text_color=fff&amp;icon_color=fff&amp;line_height=25&amp;card_width=450px&amp;hide_title=true"
-            />
-          </div>
-
-          <!--  -->
-          <div class="imgcont" style="display: none; justify-content: flex-end;">
-            <img
-              class="hideOnDarkMode"
-              src="https://dsrs-github-readme-stats.vercel.app/api/top-langs/?username=DanielSRS&amp;layout=compact&amp;langs_count=10&amp;show_icons=true&amp;bg_color=00000000&amp;border_radius=0&amp;hide_border=true&amp;title_color=000&amp;text_color=000&amp;icon_color=000&amp;card_width=450px&amp;line_height=25&amp;hide_title=true"
-            />
-            <img
-              class="hideOnLightMode"
-              src="https://dsrs-github-readme-stats.vercel.app/api/top-langs/?username=DanielSRS&amp;layout=compact&amp;langs_count=10&amp;show_icons=true&amp;bg_color=00000000&amp;border_radius=0&amp;hide_border=true&amp;title_color=fff&amp;text_color=fff&amp;icon_color=fff&amp;card_width=450px&amp;line_height=25&amp;hide_title=true"
-            />
-          </div>
-
-          <!--  -->
-          <div class="imgcont" style="display: none;">
-            <img
-              class="hideOnDarkMode"
-              style=""
-              src="https://dsrs-github-readme-stats.vercel.app/api/wakatime?username=DanielSRS&amp;range=last_7_days&amp;langs_count=10&amp;layout=compact&amp;show_icons=true&amp;bg_color=00000000&amp;border_radius=0&amp;hide_border=true&amp;text_color=000&amp;icon_color=000&amp;card_width=450px&amp;line_height=25&amp;hide_title=true"
-            />
-            <img
-              class="hideOnLightMode"
-              style=""
-              src="https://dsrs-github-readme-stats.vercel.app/api/wakatime?username=DanielSRS&amp;range=last_7_days&amp;langs_count=10&amp;layout=compact&amp;show_icons=true&amp;bg_color=00000000&amp;border_radius=0&amp;hide_border=true&amp;text_color=fff&amp;icon_color=fff&amp;card_width=450px&amp;line_height=25&amp;hide_title=true"
-            />
-          </div>
-            <img
-              src="https://fastly.picsum.photos/id/929/200/300.jpg?hmac=cDiAv5Denc7xEb3NN4q1-CKp6ryrG-3uLdj2XhA90WU"
-            />
+        <!--  -->
+        <div class="imgcont" style="display: none;">
+          <img
+            class="hideOnDarkMode"
+            style=""
+            src="https://dsrs-github-readme-stats.vercel.app/api/wakatime?username=DanielSRS&amp;range=last_7_days&amp;langs_count=10&amp;layout=compact&amp;show_icons=true&amp;bg_color=00000000&amp;border_radius=0&amp;hide_border=true&amp;text_color=000&amp;icon_color=000&amp;card_width=450px&amp;line_height=25&amp;hide_title=true"
+          />
+          <img
+            class="hideOnLightMode"
+            style=""
+            src="https://dsrs-github-readme-stats.vercel.app/api/wakatime?username=DanielSRS&amp;range=last_7_days&amp;langs_count=10&amp;layout=compact&amp;show_icons=true&amp;bg_color=00000000&amp;border_radius=0&amp;hide_border=true&amp;text_color=fff&amp;icon_color=fff&amp;card_width=450px&amp;line_height=25&amp;hide_title=true"
+          />
         </div>
-      </body>
-    </div>
-  </div>
+      </div>
+    </body>
+  </html>
   </foreignObject>
 </svg>
