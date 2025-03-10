@@ -1,5 +1,10 @@
-﻿<div style="width: 100%;">
-  <img href="#" src="assets/images/full.svg" style="width: 100%; min-height: 800px" alt="Need to work on this">
+﻿<div>
+  <img
+    width="100%"
+    height="1200px"
+    src="assets/images/full.svg"
+    alt="Need to work on this"
+  />
 </div>
 
 <!-- ![Github stats - light](https://dsrs-github-readme-stats.vercel.app/api?username=DanielSRS&amp;count_private=true&amp;show_icons=true&amp;bg_color=00000000&amp;border_radius=0&amp;hide_border=true&amp;title_color=000&amp;text_color=000&amp;icon_color=000&amp;line_height=25&amp;card_width=450px&amp;hide_title=true#gh-light-mode-only)
