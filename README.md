@@ -1,11 +1,11 @@
-﻿<div>
+﻿<a href="#">
   <img
     width="100%"
     height="705px"
     src="assets/images/full.svg"
     alt="Need to work on this"
   />
-</div>
+</a>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://dsrs-github-readme-stats.vercel.app/api?username=DanielSRS&amp;count_private=true&amp;show_icons=true&amp;bg_color=00000000&amp;border_radius=0&amp;hide_border=false&amp;title_color=fff&amp;text_color=fff&amp;icon_color=fff&amp;line_height=25&amp;card_width=450px&amp;hide_title=false">
