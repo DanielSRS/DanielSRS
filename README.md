@@ -1,7 +1,7 @@
 ﻿<div>
   <img
     width="100%"
-    height="700px"
+    height="705px"
     src="assets/images/full.svg"
     alt="Need to work on this"
   />
