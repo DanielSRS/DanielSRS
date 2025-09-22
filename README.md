@@ -1,10 +1,12 @@
 ﻿<a href="#">
+ <picture>
   <img
-    width="100%"
-    height="705px"
-    src="assets/images/full.svg"
-    alt="Need to work on this"
-  />
+      width="100%"
+      height="705px"
+      src="assets/images/full.svg"
+      alt="Need to work on this"
+    />
+  </picture>
 </a>
 
 <picture>
