@@ -706,6 +706,7 @@
       .bubble-track {
         position: absolute;
         inset: 0;
+        margin: 0;                                   /* the card's "* + *" rule adds one */
         translate: var(--bubble-x) var(--bubble-y);
         pointer-events: none;
       }
