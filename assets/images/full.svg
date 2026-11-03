@@ -4,6 +4,74 @@
   height="100%"
   preserveAspectRatio="none"
   xmlns="http://www.w3.org/2000/svg">
+  <!--
+    Glass lens for the floating bubble. Static markup, nothing here runs or animates.
+    It is applied with `filter: url(#bubble-lens)` to the element that holds the card,
+    and the lens sits at a fixed spot of that element: the top-left 120px square
+    (plus 36px around it so the rim can see past its edge). CSS moves that element
+    along the bubble's path and moves the card back by the same amount, so the card
+    stays put and the lens travels over it.
+      1. inside the lens box, flatten the card onto the page colour
+      2. refraction: flat centre, magnified ring, and what is under the rim packed
+         into it (nothing is hidden), with red, green and blue bent by slightly
+         different amounts (chromatic aberration)
+      3. smooth only the bent and packed parts (the displacement copies whole pixels)
+      4. reflection: the surroundings mirrored into the rim, faded in toward the edge
+      5. keep the result only inside the round lens; outside it the card is untouched
+    The maps are built from two gradient images, each given the lens box size (192px)
+    because Safari draws an image at its own size first and then stretches it:
+      "dir"  points every pixel at the centre (red = x, green = y)
+      "prof" one radial gradient holding the profiles from centre to rim:
+             red = how much to bend, green = how far out the rim looks,
+             blue = how strong the reflection is, alpha = the lens outline
+    map = 0.5 + (dir - 0.5) * profile
+  -->
+  <defs>
+    <filter id="bubble-lens" x="-1.1" y="-1.1" width="2.2" height="2.2"
+            primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood class="bubble-lens-backdrop" x="-36" y="-36" width="192" height="192" result="page"/>
+      <feComposite in="SourceGraphic" in2="page" operator="over" x="-36" y="-36" width="192" height="192" result="scene"/>
+
+      <feImage x="-36" y="-36" width="192" height="192" preserveAspectRatio="none" result="dir"
+               href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3ClinearGradient id='x' x1='.1875' x2='.8125'%3E%3Cstop stop-color='%23f00'/%3E%3Cstop offset='1'/%3E%3C/linearGradient%3E%3ClinearGradient id='y' x2='0' y1='.1875' y2='.8125'%3E%3Cstop stop-color='%230f0'/%3E%3Cstop offset='1'/%3E%3C/linearGradient%3E%3Crect width='1' height='1' fill='url(%23x)'/%3E%3Crect width='1' height='1' fill='url(%23y)' style='mix-blend-mode:screen'/%3E%3C/svg%3E"/>
+      <feImage x="-36" y="-36" width="192" height="192" preserveAspectRatio="none" result="prof"
+               href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3CradialGradient id='p' r='.31771'%3E%3Cstop offset='.4426' stop-color='%2300ff00'/%3E%3Cstop offset='.541' stop-color='%2312ff00'/%3E%3Cstop offset='.6098' stop-color='%2343ff00'/%3E%3Cstop offset='.6689' stop-color='%2380ff00'/%3E%3Cstop offset='.7279' stop-color='%23c0c010'/%3E%3Cstop offset='.7869' stop-color='%23f08a27'/%3E%3Cstop offset='.8361' stop-color='%23fd633e'/%3E%3Cstop offset='.8754' stop-color='%23ec4751'/%3E%3Cstop offset='.9148' stop-color='%23ba2e66'/%3E%3Cstop offset='.9443' stop-color='%237c1c76'/%3E%3Cstop offset='.9689' stop-color='%23340e84'/%3E%3Cstop offset='.9836' stop-color='%2300068c'/%3E%3Cstop offset='1' stop-color='%2300068c' stop-opacity='0'/%3E%3C/radialGradient%3E%3Crect width='1' height='1' fill='url(%23p)'/%3E%3C/svg%3E"/>
+      <feColorMatrix in="prof" type="matrix" values="1 0 0 0 0  1 0 0 0 0  0 0 0 0 0  0 0 0 0 1" x="-36" y="-36" width="192" height="192" result="bendProfile"/>
+      <feComposite in="dir" in2="bendProfile" operator="arithmetic" k1="1" k3="-0.5" k4="0.5" x="-36" y="-36" width="192" height="192" result="bend"/>
+      <feColorMatrix in="dir" type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 1 0 0  0 0 0 1 0" x="-36" y="-36" width="192" height="192" result="outward"/>
+      <feColorMatrix in="prof" type="matrix" values="0 1 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 0 1" x="-36" y="-36" width="192" height="192" result="mirrorProfile"/>
+      <feComposite in="outward" in2="mirrorProfile" operator="arithmetic" k1="1" k3="-0.5" k4="0.5" x="-36" y="-36" width="192" height="192" result="mirror"/>
+
+      <feDisplacementMap in="scene" in2="bend" scale="21.24" xChannelSelector="R" yChannelSelector="G" x="-36" y="-36" width="192" height="192" result="bentR"/>
+      <feDisplacementMap in="scene" in2="bend" scale="19.71" xChannelSelector="R" yChannelSelector="G" x="-36" y="-36" width="192" height="192" result="bentG"/>
+      <feDisplacementMap in="scene" in2="bend" scale="18.18" xChannelSelector="R" yChannelSelector="G" x="-36" y="-36" width="192" height="192" result="bentB"/>
+      <feColorMatrix in="bentR" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" x="-36" y="-36" width="192" height="192" result="r"/>
+      <feColorMatrix in="bentG" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" x="-36" y="-36" width="192" height="192" result="g"/>
+      <feColorMatrix in="bentB" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" x="-36" y="-36" width="192" height="192" result="b"/>
+      <feBlend in="r" in2="g" mode="screen" x="-36" y="-36" width="192" height="192" result="rg"/>
+      <feBlend in="rg" in2="b" mode="screen" x="-36" y="-36" width="192" height="192" result="refractedSharp"/>
+
+      <feGaussianBlur in="refractedSharp" stdDeviation="0.768" x="-36" y="-36" width="192" height="192" result="refractedSoft"/>
+      <feColorMatrix in="prof" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.6 0 1 0 0" x="-36" y="-36" width="192" height="192" result="bendAmount"/>
+      <feComposite in="refractedSoft" in2="bendAmount" operator="in" x="-36" y="-36" width="192" height="192" result="bentSoft"/>
+      <feComposite in="bentSoft" in2="refractedSharp" operator="over" x="-36" y="-36" width="192" height="192" result="refracted"/>
+
+      <feDisplacementMap in="scene" in2="mirror" scale="155.3" xChannelSelector="R" yChannelSelector="G" x="-36" y="-36" width="192" height="192" result="mirrored"/>
+      <feGaussianBlur in="mirrored" stdDeviation="0.768" x="-36" y="-36" width="192" height="192" result="mirroredSoft"/>
+      <feColorMatrix in="prof" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 1 0 0" x="-36" y="-36" width="192" height="192" result="fresnel"/>
+      <feComposite in="mirroredSoft" in2="fresnel" operator="in" x="-36" y="-36" width="192" height="192" result="reflection"/>
+      <feComposite in="reflection" in2="refracted" operator="over" x="-36" y="-36" width="192" height="192" result="lens"/>
+      <feColorMatrix in="lens" type="saturate" values="1.5" x="-36" y="-36" width="192" height="192" result="lensSat"/>
+
+      <feColorMatrix in="prof" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" x="-36" y="-36" width="192" height="192" result="disc"/>
+      <feComposite in="lensSat" in2="disc" operator="in" x="-36" y="-36" width="192" height="192" result="glass"/>
+      <feComposite in="SourceGraphic" in2="disc" operator="out" result="around"/>
+      <feMerge><feMergeNode in="around"/><feMergeNode in="glass"/></feMerge>
+    </filter>
+
+
+
+  </defs>
   <foreignObject width="100%" height="100%">
   <html xmlns="http://www.w3.org/1999/xhtml">
     <script type="text/javascript">
@@ -576,8 +644,172 @@
       }
     </style>
 
+    <!-- floating glass bubble (CSS animation; the bending is the SVG filter #bubble-lens) -->
+    <style>
+      :root {
+        --bubble-size: 120px;                        /* #bubble-lens is drawn for 120px */
+        --bubble-pad: 18px;                          /* keeps the wobble off the edges */
+        --bubble-backdrop: #ffffff;                  /* page colour behind this image */
+        --bubble-tint: rgb(255 255 255 / .06);       /* glass body */
+        --bubble-hairline: rgb(0 0 0 / .12);
+        --bubble-edge-light: rgb(255 255 255 / .95); /* specular rim */
+        --bubble-glow: rgb(255 255 255 / .45);       /* light caught inside the rim */
+        --bubble-shadow: rgb(0 0 0 / .08);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bubble-backdrop: #0d1117;                /* GitHub dark */
+          --bubble-tint: rgb(255 255 255 / .05);
+          --bubble-hairline: rgb(255 255 255 / .14);
+          --bubble-edge-light: rgb(255 255 255 / .85);
+          --bubble-glow: rgb(255 255 255 / .16);
+          --bubble-shadow: rgb(0 0 0 / .35);
+        }
+      }
+      .bubble-lens-backdrop {
+        flood-color: var(--bubble-backdrop);
+      }
+
+      /*
+        How it moves. The lens is fixed at the top-left of .bubble-lens.
+          .bubble-scene   works out one position for the bubble (--bubble-x, --bubble-y)
+          .bubble-lens    moves by it, carrying the lens
+          .bubble-card    moves back by it, so on screen the card does not move
+          .bubble-track   moves by it, carrying the bubble's outline, shine and shadow
+        The position is rounded to whole pixels; at a fraction of a pixel some browsers
+        redraw the card slightly differently each frame and it shakes.
+        % in translate is the layer's own size, and every layer here is the card's size.
+        The lens itself stays round: scaling the card back can't cancel exactly, so the
+        squash and wobble are only on the bubble's outline.
+      */
+      @property --bubble-tx { syntax: "&lt;number&gt;"; inherits: true; initial-value: 0; }
+      @property --bubble-ty { syntax: "&lt;number&gt;"; inherits: true; initial-value: 0; }
+      @property --bubble-sx { syntax: "&lt;length&gt;"; inherits: true; initial-value: 0px; }
+      @property --bubble-sy { syntax: "&lt;length&gt;"; inherits: true; initial-value: 0px; }
+      .bubble-scene {
+        position: relative;
+        overflow: clip;
+        --bubble-x: round(calc(var(--bubble-pad) + var(--bubble-tx) * (100% - var(--bubble-size) - 2 * var(--bubble-pad)) + var(--bubble-sx)), 1px);
+        --bubble-y: round(calc(var(--bubble-pad) + var(--bubble-ty) * (100% - var(--bubble-size) - 2 * var(--bubble-pad)) + var(--bubble-sy)), 1px);
+        animation:
+          bubble-drift-x 29s ease-in-out -6s infinite alternate,
+          bubble-drift-y 19s ease-in-out -3s infinite alternate,
+          bubble-sway 11s ease-in-out infinite;
+      }
+      .bubble-lens {
+        translate: var(--bubble-x) var(--bubble-y);
+        filter: url(#bubble-lens);
+      }
+      .bubble-card {
+        translate: calc(-1 * var(--bubble-x)) calc(-1 * var(--bubble-y));
+      }
+      .bubble-track {
+        position: absolute;
+        inset: 0;
+        margin: 0;                                   /* the card's "* + *" rule adds one */
+        translate: var(--bubble-x) var(--bubble-y);
+        pointer-events: none;
+      }
+
+      /* the bubble itself: outline, tint, rim light, highlights and shadow */
+      .bubble,
+      .bubble * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .bubble {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: var(--bubble-size);
+        height: var(--bubble-size);
+        border-radius: 50%;
+        pointer-events: none;
+        animation:
+          bubble-morph 7s ease-in-out infinite,
+          bubble-squash 3.2s ease-in-out infinite;
+      }
+      .bubble > * {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+      }
+
+      .bubble-shadow {
+        box-shadow:
+          0 6px 14px -6px var(--bubble-shadow),
+          0 1px 3px -1px var(--bubble-shadow);
+      }
+
+      /* edge lighting: bright where the light hits, a soft glow just inside the rim */
+      .bubble-rim {
+        background: var(--bubble-tint);
+        box-shadow:
+          inset 0 0 0 1px var(--bubble-hairline),
+          inset 2px 3px 1px -1px var(--bubble-edge-light),
+          inset -2px -3px 1px -1px var(--bubble-edge-light),
+          inset 0 0 14px 1px var(--bubble-glow);
+      }
+
+      /* thin specular ring, brightest top-left and bottom-right */
+      .bubble-rim::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1.5px;
+        background: conic-gradient(from 0deg,
+          rgb(255 255 255 / .35),
+          rgb(255 255 255 / .05) 70deg,
+          rgb(255 255 255 / .80) 135deg,
+          rgb(255 255 255 / .05) 200deg,
+          rgb(255 255 255 / .10) 250deg,
+          rgb(255 255 255 / 1)   315deg,
+          rgb(255 255 255 / .35));
+        mask:
+          linear-gradient(#000 0 0) content-box exclude,
+          linear-gradient(#000 0 0);
+      }
+
+      /* broad, soft reflection of the light source on the upper surface */
+      .bubble-shine {
+        background:
+          radial-gradient(ellipse 50% 26% at 34% 15%,
+            rgb(255 255 255 / .38), rgb(255 255 255 / .08) 60%, transparent 100%),
+          radial-gradient(ellipse 40% 18% at 66% 90%,
+            rgb(255 255 255 / .18), transparent 100%);
+      }
+
+      /* the big drift: 0 to 1 across the card */
+      @keyframes bubble-drift-x { from { --bubble-tx: 0; } to { --bubble-tx: 1; } }
+      @keyframes bubble-drift-y { from { --bubble-ty: 0; } to { --bubble-ty: 1; } }
+      /* small buoyant wander on top of the big drift */
+      @keyframes bubble-sway {
+        0%, 100% { --bubble-sx: 0px;   --bubble-sy: 0px; }
+        25%      { --bubble-sx: 11px;  --bubble-sy: -8px; }
+        50%      { --bubble-sx: -4px;  --bubble-sy: -14px; }
+        75%      { --bubble-sx: -11px; --bubble-sy: 4px; }
+      }
+      /* the surface never holds still: a gentle wobble */
+      @keyframes bubble-morph {
+        0%, 100% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+        20%      { border-radius: 53% 47% 51% 49% / 48% 53% 47% 52%; }
+        45%      { border-radius: 47% 53% 46% 54% / 53% 47% 54% 46%; }
+        70%      { border-radius: 52% 48% 54% 46% / 46% 52% 49% 54%; }
+      }
+      @keyframes bubble-squash {
+        0%, 100% { scale: 1 1; }
+        30%      { scale: 1.05 .95; }
+        65%      { scale: .96 1.04; }
+      }
+    </style>
+
     <!-- content -->
     <body class='debug'>
+      <!-- the card rides inside the bubble's lens; see the glass bubble styles -->
+      <div class="bubble-scene">
+      <div class="bubble-lens"><div class="bubble-card">
       <table class="header">
         <tr>
           <td colspan="2" rowspan="2" class="width-auto">
@@ -715,6 +947,17 @@
       </div>
 
       <h2 id="my-stats">My Stats</h2>
+
+      </div></div>
+      <!-- floating glass bubble (decorative) -->
+      <div class="bubble-track" aria-hidden="true">
+        <div class="bubble">
+          <span class="bubble-shadow"></span>
+          <span class="bubble-rim"></span>
+          <span class="bubble-shine"></span>
+        </div>
+      </div>
+      </div>
     </body>
   </html>
   </foreignObject>
