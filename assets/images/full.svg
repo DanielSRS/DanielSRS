@@ -18,12 +18,15 @@
       3. smooth only the bent and packed parts (the displacement copies whole pixels)
       4. reflection: the surroundings mirrored into the rim, faded in toward the edge
       5. keep the result only inside the round lens; outside it the card is untouched
-    The maps are built from two gradient images, each given the lens box size (192px)
-    because Safari draws an image at its own size first and then stretches it:
-      "dir"  points every pixel at the centre (red = x, green = y)
-      "prof" one radial gradient holding the profiles from centre to rim:
-             red = how much to bend, green = how far out the rim looks,
-             blue = how strong the reflection is, alpha = the lens outline
+    The maps are built from small gradient images, all grey: a browser drawing in a
+    wide colour space (Edge on a Mac) converts coloured images, which mixes their red,
+    green and blue, while grey stays grey. Each image gets the lens box size (192px)
+    because Safari draws an image at its own size first and then stretches it.
+      "dirX", "dirY"  point every pixel at the centre, across and down
+      profiles from centre to rim:
+        "bendProf"     how much to bend (its alpha is the lens outline)
+        "rimProf"      how far out the rim looks
+        "fresnelProf"  how strong the reflection is
     map = 0.5 + (dir - 0.5) * profile
   -->
   <defs>
@@ -32,14 +35,23 @@
       <feFlood class="bubble-lens-backdrop" x="-36" y="-36" width="192" height="192" result="page"/>
       <feComposite in="SourceGraphic" in2="page" operator="over" x="-36" y="-36" width="192" height="192" result="scene"/>
 
-      <feImage x="-36" y="-36" width="192" height="192" preserveAspectRatio="none" result="dir"
-               href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3ClinearGradient id='x' x1='.1875' x2='.8125'%3E%3Cstop stop-color='%23f00'/%3E%3Cstop offset='1'/%3E%3C/linearGradient%3E%3ClinearGradient id='y' x2='0' y1='.1875' y2='.8125'%3E%3Cstop stop-color='%230f0'/%3E%3Cstop offset='1'/%3E%3C/linearGradient%3E%3Crect width='1' height='1' fill='url(%23x)'/%3E%3Crect width='1' height='1' fill='url(%23y)' style='mix-blend-mode:screen'/%3E%3C/svg%3E"/>
-      <feImage x="-36" y="-36" width="192" height="192" preserveAspectRatio="none" result="prof"
-               href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3CradialGradient id='p' r='.31771'%3E%3Cstop offset='.4426' stop-color='%2300ff00'/%3E%3Cstop offset='.541' stop-color='%2312ff00'/%3E%3Cstop offset='.6098' stop-color='%2343ff00'/%3E%3Cstop offset='.6689' stop-color='%2380ff00'/%3E%3Cstop offset='.7279' stop-color='%23c0c010'/%3E%3Cstop offset='.7869' stop-color='%23f08a27'/%3E%3Cstop offset='.8361' stop-color='%23fd633e'/%3E%3Cstop offset='.8754' stop-color='%23ec4751'/%3E%3Cstop offset='.9148' stop-color='%23ba2e66'/%3E%3Cstop offset='.9443' stop-color='%237c1c76'/%3E%3Cstop offset='.9689' stop-color='%23340e84'/%3E%3Cstop offset='.9836' stop-color='%2300068c'/%3E%3Cstop offset='1' stop-color='%2300068c' stop-opacity='0'/%3E%3C/radialGradient%3E%3Crect width='1' height='1' fill='url(%23p)'/%3E%3C/svg%3E"/>
-      <feColorMatrix in="prof" type="matrix" values="1 0 0 0 0  1 0 0 0 0  0 0 0 0 0  0 0 0 0 1" x="-36" y="-36" width="192" height="192" result="bendProfile"/>
+      <feImage x="-36" y="-36" width="192" height="192" preserveAspectRatio="none" result="dirX"
+               href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3ClinearGradient id='g' x1='.1875' x2='.8125'%3E%3Cstop stop-color='%23fff'/%3E%3Cstop offset='1'/%3E%3C/linearGradient%3E%3Crect width='1' height='1' fill='url(%23g)'/%3E%3C/svg%3E"/>
+      <feImage x="-36" y="-36" width="192" height="192" preserveAspectRatio="none" result="dirY"
+               href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3ClinearGradient id='g' x2='0' y1='.1875' y2='.8125'%3E%3Cstop stop-color='%23fff'/%3E%3Cstop offset='1'/%3E%3C/linearGradient%3E%3Crect width='1' height='1' fill='url(%23g)'/%3E%3C/svg%3E"/>
+      <feImage x="-36" y="-36" width="192" height="192" preserveAspectRatio="none" result="bendProf"
+               href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3CradialGradient id='g' r='.31771'%3E%3Cstop offset='.4426' stop-color='%23000'/%3E%3Cstop offset='.541' stop-color='%23121212'/%3E%3Cstop offset='.6098' stop-color='%23434343'/%3E%3Cstop offset='.6689' stop-color='%23808080'/%3E%3Cstop offset='.7279' stop-color='%23c0c0c0'/%3E%3Cstop offset='.7869' stop-color='%23f0f0f0'/%3E%3Cstop offset='.8361' stop-color='%23fdfdfd'/%3E%3Cstop offset='.8754' stop-color='%23ececec'/%3E%3Cstop offset='.9148' stop-color='%23bababa'/%3E%3Cstop offset='.9443' stop-color='%237c7c7c'/%3E%3Cstop offset='.9689' stop-color='%23343434'/%3E%3Cstop offset='.9836' stop-color='%23000'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='0'/%3E%3C/radialGradient%3E%3Crect width='1' height='1' fill='url(%23g)'/%3E%3C/svg%3E"/>
+      <feImage x="-36" y="-36" width="192" height="192" preserveAspectRatio="none" result="rimProf"
+               href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3CradialGradient id='g' r='.31771'%3E%3Cstop offset='.6689' stop-color='%23fff'/%3E%3Cstop offset='.7279' stop-color='%23c0c0c0'/%3E%3Cstop offset='.7869' stop-color='%238a8a8a'/%3E%3Cstop offset='.8361' stop-color='%23636363'/%3E%3Cstop offset='.8754' stop-color='%23474747'/%3E%3Cstop offset='.9148' stop-color='%232e2e2e'/%3E%3Cstop offset='.9443' stop-color='%231c1c1c'/%3E%3Cstop offset='.9689' stop-color='%230e0e0e'/%3E%3Cstop offset='.9836' stop-color='%23060606'/%3E%3Cstop offset='1' stop-color='%23060606' stop-opacity='0'/%3E%3C/radialGradient%3E%3Crect width='1' height='1' fill='url(%23g)'/%3E%3C/svg%3E"/>
+      <feImage x="-36" y="-36" width="192" height="192" preserveAspectRatio="none" result="fresnelProf"
+               href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3CradialGradient id='g' r='.31771'%3E%3Cstop offset='.6689' stop-color='%23000'/%3E%3Cstop offset='.7279' stop-color='%23101010'/%3E%3Cstop offset='.7869' stop-color='%23272727'/%3E%3Cstop offset='.8361' stop-color='%233e3e3e'/%3E%3Cstop offset='.8754' stop-color='%23515151'/%3E%3Cstop offset='.9148' stop-color='%23666666'/%3E%3Cstop offset='.9443' stop-color='%23767676'/%3E%3Cstop offset='.9689' stop-color='%23848484'/%3E%3Cstop offset='.9836' stop-color='%238c8c8c'/%3E%3Cstop offset='1' stop-color='%238c8c8c' stop-opacity='0'/%3E%3C/radialGradient%3E%3Crect width='1' height='1' fill='url(%23g)'/%3E%3C/svg%3E"/>
+      <feColorMatrix in="dirX" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0 1" x="-36" y="-36" width="192" height="192" result="dirR"/>
+      <feColorMatrix in="dirY" type="matrix" values="0 0 0 0 0  1 0 0 0 0  0 0 0 0 0  0 0 0 0 1" x="-36" y="-36" width="192" height="192" result="dirG"/>
+      <feComposite in="dirR" in2="dirG" operator="arithmetic" k2="1" k3="1" x="-36" y="-36" width="192" height="192" result="dir"/>
+      <feColorMatrix in="bendProf" type="matrix" values="1 0 0 0 0  1 0 0 0 0  0 0 0 0 0  0 0 0 0 1" x="-36" y="-36" width="192" height="192" result="bendProfile"/>
       <feComposite in="dir" in2="bendProfile" operator="arithmetic" k1="1" k3="-0.5" k4="0.5" x="-36" y="-36" width="192" height="192" result="bend"/>
       <feColorMatrix in="dir" type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 1 0 0  0 0 0 1 0" x="-36" y="-36" width="192" height="192" result="outward"/>
-      <feColorMatrix in="prof" type="matrix" values="0 1 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 0 1" x="-36" y="-36" width="192" height="192" result="mirrorProfile"/>
+      <feColorMatrix in="rimProf" type="matrix" values="1 0 0 0 0  1 0 0 0 0  0 0 0 0 0  0 0 0 0 1" x="-36" y="-36" width="192" height="192" result="mirrorProfile"/>
       <feComposite in="outward" in2="mirrorProfile" operator="arithmetic" k1="1" k3="-0.5" k4="0.5" x="-36" y="-36" width="192" height="192" result="mirror"/>
 
       <feDisplacementMap in="scene" in2="bend" scale="21.24" xChannelSelector="R" yChannelSelector="G" x="-36" y="-36" width="192" height="192" result="bentR"/>
@@ -52,18 +64,19 @@
       <feBlend in="rg" in2="b" mode="screen" x="-36" y="-36" width="192" height="192" result="refractedSharp"/>
 
       <feGaussianBlur in="refractedSharp" stdDeviation="0.768" x="-36" y="-36" width="192" height="192" result="refractedSoft"/>
-      <feColorMatrix in="prof" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.6 0 1 0 0" x="-36" y="-36" width="192" height="192" result="bendAmount"/>
+      <feColorMatrix in="fresnelProf" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1 0 0 0 0" x="-36" y="-36" width="192" height="192" result="fresnel"/>
+      <feColorMatrix in="bendProf" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.6 0 0 0 0" x="-36" y="-36" width="192" height="192" result="bendOnly"/>
+      <feComposite in="bendOnly" in2="fresnel" operator="arithmetic" k2="1" k3="1" x="-36" y="-36" width="192" height="192" result="bendAmount"/>
       <feComposite in="refractedSoft" in2="bendAmount" operator="in" x="-36" y="-36" width="192" height="192" result="bentSoft"/>
       <feComposite in="bentSoft" in2="refractedSharp" operator="over" x="-36" y="-36" width="192" height="192" result="refracted"/>
 
       <feDisplacementMap in="scene" in2="mirror" scale="155.3" xChannelSelector="R" yChannelSelector="G" x="-36" y="-36" width="192" height="192" result="mirrored"/>
       <feGaussianBlur in="mirrored" stdDeviation="0.768" x="-36" y="-36" width="192" height="192" result="mirroredSoft"/>
-      <feColorMatrix in="prof" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 1 0 0" x="-36" y="-36" width="192" height="192" result="fresnel"/>
       <feComposite in="mirroredSoft" in2="fresnel" operator="in" x="-36" y="-36" width="192" height="192" result="reflection"/>
       <feComposite in="reflection" in2="refracted" operator="over" x="-36" y="-36" width="192" height="192" result="lens"/>
       <feColorMatrix in="lens" type="saturate" values="1.5" x="-36" y="-36" width="192" height="192" result="lensSat"/>
 
-      <feColorMatrix in="prof" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" x="-36" y="-36" width="192" height="192" result="disc"/>
+      <feColorMatrix in="bendProf" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" x="-36" y="-36" width="192" height="192" result="disc"/>
       <feComposite in="lensSat" in2="disc" operator="in" x="-36" y="-36" width="192" height="192" result="glass"/>
       <feComposite in="SourceGraphic" in2="disc" operator="out" result="around"/>
       <feMerge><feMergeNode in="around"/><feMergeNode in="glass"/></feMerge>
